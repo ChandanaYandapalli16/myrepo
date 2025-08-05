@@ -4,6 +4,9 @@ env:
     AWS_REGION: us-east-1
     REPOSITORY_URI: 512138916710.dkr.ecr.us-east-1.amazonaws.com/organic/myrepo
 phases:
+  install:
+    runtime-versions:
+      docker: 20
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
