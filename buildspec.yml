@@ -1,5 +1,4 @@
 version: 0.2
-
 env:
   variables:
     IMAGE_TAG: "latest"
@@ -13,19 +12,12 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-
   pre_build:
     commands:
       - echo Build started on `date`
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
-      
-      -/ IMAGE_URI=$AWS_512138916710.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_NAME:$IMAGE_TAG
-     
   build:
     commands:
-      - /docker build -t $REPOSITORY_NAME .
-      - /docker tag $REPOSITORY_NAME:latest $IMAGE_URI
-      
       - echo Building the Docker image...
      - docker build -t $REPOSITORY_URI:latest .
   post_build:
@@ -34,7 +26,6 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - echo Creating imagedefinitions.json file...
       - printf '[{"name":"organic/myrepo","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
-
 artifacts:
   files:
     - imagedefinitions.json
