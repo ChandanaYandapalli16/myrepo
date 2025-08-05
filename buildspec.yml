@@ -17,7 +17,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
       - echo Creating imagedefinitions.json file...
-      - printf '[{"name":"Organic-ECS","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"myrepo","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
