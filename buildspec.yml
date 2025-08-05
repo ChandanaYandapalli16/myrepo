@@ -12,7 +12,6 @@ phases:
     commands:
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
-      - docker tag organic/myrepo:latest $REPOSITORY_URI: latest
   post_build:
     commands:
       - echo Pushing the Docker image...
