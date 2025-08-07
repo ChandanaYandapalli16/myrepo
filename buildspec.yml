@@ -4,9 +4,6 @@ env:
     AWS_REGION: us-east-1
     REPOSITORY_URI: 512138916710.dkr.ecr.us-east-1.amazonaws.com/organic
 phases:
-  install:
-    runtime-versions:
-      docker: 20
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -19,8 +16,8 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
-      - echo Creating imagedefinitions.json file...
-      - printf '[{"name":"myrepo","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - echo Creating imagedefinitions.json...
+      - printf '[{"name":"organic","imageUri":"%s"}]' "$REPOSITORY_URI:latest" > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
